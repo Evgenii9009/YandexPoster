@@ -9,6 +9,8 @@ class Event(models.Model):
         null=True,
         blank=True
     )
+    place_id = models.CharField(max_length=100, 
+                                null=True)
     short_description = models.TextField(
         verbose_name='Краткое описание',
         blank=True,
