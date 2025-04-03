@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.conf import settings
 
 class Event(models.Model):
 
@@ -11,6 +11,7 @@ class Event(models.Model):
     )
     place_id = models.CharField(max_length=100, 
                                 null=True)
+    detailsUrl = models.CharField(max_length=200, null=True)
     short_description = models.TextField(
         verbose_name='Краткое описание',
         blank=True,
@@ -52,6 +53,10 @@ class Image(models.Model):
         default=1,
         verbose_name="Событие"
     )
+
+    @property
+    def get_absolute_image_url(self):
+        return "{0}".format(self.image.url)
 
     class Meta:
         verbose_name = 'Фото события'
