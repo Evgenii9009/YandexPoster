@@ -44,7 +44,7 @@ class Image(models.Model):
         verbose_name='Номер фото',
         null=True
     )
-    event = models.ForeignKey(
+    event_name = models.ForeignKey(
         Event,
         on_delete=models.CASCADE,
         default=1,
