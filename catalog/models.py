@@ -9,10 +9,6 @@ class Event(models.Model):
         null=True,
         blank=True
     )
-    image = models.ImageField(
-        verbose_name='Фото события',
-        null=True, blank=True
-    )
     short_description = models.TextField(
         verbose_name='Краткое описание',
         blank=True,
@@ -36,3 +32,25 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class Image(models.Model):
+
+    image = models.ImageField(
+        verbose_name='Фото события',
+        null=True, blank=True
+    )
+    number = models.IntegerField(
+        verbose_name='Номер фото',
+        null=True
+    )
+    event = models.ForeignKey(
+        Event,
+        on_delete=models.CASCADE,
+        default=1,
+        verbose_name="Событие"
+    )
+
+    class Meta:
+        verbose_name = 'Фото события'
+        verbose_name_plural = 'Фото событий'
