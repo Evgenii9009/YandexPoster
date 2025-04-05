@@ -24,7 +24,6 @@ def serialize_place(event):
           },
         "properties": {
             "title": event.title,
-            "placeId": event.place_id,
             "detailsUrl": reverse(place_detail, kwargs={'place_id': event.id})
           }
           }
