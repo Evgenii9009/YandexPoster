@@ -2,3 +2,6 @@ Django==4.2
 django-admin-sortable2==2.2.6
 django-tinymce==4.1.0
 environs==14.1.1
+marshmallow==3.26.1
+packaging==24.2
+python-dotenv==1.1.0
