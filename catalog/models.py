@@ -1,4 +1,5 @@
 from django.db import models
+from tinymce.models import HTMLField
 
 
 class Event(models.Model):
@@ -15,7 +16,7 @@ class Event(models.Model):
         verbose_name='Краткое описание',
         blank=True,
     )
-    long_description = models.TextField(
+    long_description = HTMLField(
         verbose_name='Длинное описание',
         blank=True,
     )
