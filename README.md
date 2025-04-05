@@ -17,7 +17,9 @@
 - `SECRET_KEY` — секретный ключ проекта
 - `ALLOWED_HOSTS` — см [документацию Django](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).
 
+## Пример работы
 
+Пример работы сайта можно увидеть [здесь](https://eugene9009.pythonanywhere.com/)
 ## Цели проекта
 
 Код написан в учебных целях — это урок в курсе по Python и веб-разработке на сайте [Devman](https://dvmn.org).
