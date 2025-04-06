@@ -49,7 +49,7 @@ class Image(models.Model):
         Event,
         on_delete=models.CASCADE,
         default=1,
-        verbose_name="Событие"
+        verbose_name="Событие", related_name='images'
     )
 
     @property

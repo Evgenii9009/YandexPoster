@@ -21,6 +21,7 @@ class ImageAdmin(admin.ModelAdmin):
 
 class ImageStackedInline(SortableStackedInline):
     model = Image
+    
 
 
 @admin.register(Event)
