@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0002_event_long_description'),
+        ('places', '0002_event_long_description'),
     ]
 
     operations = [
@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image', models.ImageField(blank=True, null=True, upload_to='', verbose_name='Фото события')),
                 ('number', models.IntegerField(null=True, verbose_name='Номер фото')),
-                ('event', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='catalog.event', verbose_name='Событие')),
+                ('event', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='places.event', verbose_name='Событие')),
             ],
         ),
     ]

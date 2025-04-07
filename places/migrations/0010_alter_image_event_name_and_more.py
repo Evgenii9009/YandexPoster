@@ -7,14 +7,14 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0009_alter_image_options_alter_event_long_description'),
+        ('places', '0009_alter_image_options_alter_event_long_description'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='image',
             name='event_name',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='images', to='catalog.event', verbose_name='Событие'),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='images', to='places.event', verbose_name='Событие'),
         ),
         migrations.AlterField(
             model_name='image',

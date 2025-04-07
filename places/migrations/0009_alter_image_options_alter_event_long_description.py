@@ -7,7 +7,7 @@ import tinymce.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0008_remove_event_detailsurl'),
+        ('places', '0005_rename_event_image_event_name'),
     ]
 
     operations = [

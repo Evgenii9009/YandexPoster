@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0010_remove_event_place_id_alter_image_event_name_and_more'),
+        ('places', '0010_alter_image_event_name_and_more'),
     ]
 
     operations = [
