@@ -12,6 +12,7 @@ from places.models import Event, Image
 class ImageAdmin(admin.ModelAdmin):
     fields = ("event_name", "event_image", "number")
     readonly_fields = ["event_image"]
+    raw_id_fields=["event_name"]
 
     def event_image(self, obj):
         image_height = obj.image.height if obj.image.height <= 200 else 200
