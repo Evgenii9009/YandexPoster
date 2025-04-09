@@ -32,7 +32,7 @@ def show_main(request):
 
 def place_detail(request, place_id):
     event = get_object_or_404(Event, id=place_id)
-    images = Image.objects.filter(event_name=event.id).order_by("number")
+    images = event.images.all().order_by("number")
     event_dict = {
         "title": event.title,
         "imgs": [image.get_absolute_image_url for image in images],
