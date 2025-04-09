@@ -25,14 +25,12 @@ class Command(BaseCommand):
                                                long_description=place["description_long"],
                                                latitude=place["coordinates"]["lat"],
                                                longitude=place["coordinates"]["lng"])
-        i = 0
-        for image_url in place["imgs"]:
-            i = i+1
+        for image_number, image_url in enumerate(place["imgs"]):
             response = requests.get(image_url)
             response.raise_for_status()
             name = image_url.split("/")[-1]
             new_image, _ = Image.objects.get_or_create(image=ImageFile(response.content),
-                                                       number=i,
+                                                       number=image_number,
                                                        event_name=event)
             new_image.image.save(name,
                                  ContentFile(response.content),
