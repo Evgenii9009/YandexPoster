@@ -27,7 +27,9 @@
 
 Пример использования:
 
-`python3 manage.py load_place https://raw.githubusercontent.com/Evgenii9009/where-to-go-places/refs/heads/master/places/%D0%AF%D0%BF%D0%BE%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%D0%B0%D0%B4.json`
+```
+python3 manage.py load_place https://raw.githubusercontent.com/Evgenii9009/where-to-go-places/refs/heads/master/places/%D0%AF%D0%BF%D0%BE%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%D0%B0%D0%B4.json
+```
 
 ## Пример работы
 
