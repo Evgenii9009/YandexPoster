@@ -40,7 +40,7 @@ class Image(models.Model):
     )
     number = models.IntegerField(
         verbose_name="Номер фото",
-        null=True,
+        default=0,
         db_index=True, blank=True
     )
     event_name = models.ForeignKey(
