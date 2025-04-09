@@ -33,7 +33,7 @@ def show_main(request):
 def place_detail(request, place_id):
     event = get_object_or_404(Event, id=place_id)
     images = event.images.all().order_by("number")
-    event_dict = {
+    event_parameters = {
         "title": event.title,
         "imgs": [image.get_absolute_image_url for image in images],
         "description_short": event.short_description,
@@ -41,7 +41,7 @@ def place_detail(request, place_id):
         "coordinates": {
             "lon": event.longitude,
             "lat": event.latitude}}
-    response = JsonResponse(event_dict, safe=False,
+    response = JsonResponse(event_parameters, safe=False,
                             json_dumps_params={"ensure_ascii": False,
                                                "indent": 4})
     return response
