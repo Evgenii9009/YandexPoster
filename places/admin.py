@@ -12,15 +12,13 @@ from places.models import Event, Image
 class ImageAdmin(admin.ModelAdmin):
     fields = ("event_name", "event_image", "number")
     readonly_fields = ["event_image"]
-    raw_id_fields=["event_name"]
+    raw_id_fields = ["event_name"]
 
     def event_image(self, obj):
-        image_height = obj.image.height if obj.image.height <= 200 else 200
-        image_width = obj.image.width if obj.image.height < 200 else obj.image.width * 200/obj.image.height
-        return format_html('<img src="{url}" width="{width}" height={height} />',
+        return format_html('<img style="max-width: 300px; max-height: 200px;" src="{url}" width="{width}" height={height} />',
                            url=obj.image.url,
-                           width=image_width,
-                           height=image_height)
+                           width=obj.image.width,
+                           height=obj.image.height)
 
 
 class ImageStackedInline(SortableStackedInline):
