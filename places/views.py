@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http.response import JsonResponse
+from django.core.exceptions import MultipleObjectsReturned
 from django.urls import reverse
 
 
@@ -15,9 +16,7 @@ def serialize_place(event):
           },
         "properties": {
             "title": event.title,
-            "detailsUrl": reverse(place_detail, kwargs={
-                "place_id": event.id
-                })
+            "detailsUrl": reverse(place_detail, kwargs={"place_id": event.id})
           }
           }
 
@@ -33,7 +32,10 @@ def show_main(request):
 
 
 def place_detail(request, place_id):
-    event = get_object_or_404(Event.objects.prefetch_related('images'), id=place_id)
+    try:
+        event = get_object_or_404(Event.objects.select_related(), id=place_id)
+    except MultipleObjectsReturned:
+        print('Ошибка в данных: Найдено больше одного события')
     images = event.images.all().order_by("number")
     event_parameters = {
         "title": event.title,
@@ -42,11 +44,8 @@ def place_detail(request, place_id):
         "description_long": event.long_description,
         "coordinates": {
             "lon": event.longitude,
-            "lat": event.latitude
-            }}
+            "lat": event.latitude}}
     response = JsonResponse(event_parameters, safe=False,
-                            json_dumps_params={
-                                "ensure_ascii": False,
-                                "indent": 4
-                                })
+                            json_dumps_params={"ensure_ascii": False,
+                                               "indent": 4})
     return response
