@@ -22,29 +22,28 @@ class Command(BaseCommand):
         place = response.json()
         try:
             event, _ = Event.objects.get_or_create(title=place["title"],
-                                                   defaults={'long_description': "",
-                                                             'short_description': "",
-                                                             'latitude': 55,
-                                                             'longitude': 37, })
+                                                   short_description=place["description_short"],
+                                                   long_description=place["description_long"],
+                                                   latitude=place["coordinates"]["lat"],
+                                                   longitude=place["coordinates"]["lng"])
         except MultipleObjectsReturned:
             print('Событие уже есть в базе данных!')
-        try:
-            for image_number, image_url in enumerate(place["imgs"]):
+        for image_number, image_url in enumerate(place["imgs"]):
+            try:
                 response = requests.get(image_url)
                 response.raise_for_status()
                 name = image_url.split("/")[-1]
                 image = ContentFile(response.content)
                 try:
-                    new_image, created = Image.objects.get_or_create(image,
-                                                                     number=image_number,
-                                                                     event_name=event)
-                    if created:
-                        new_image.image.save(name,
-                                             image,
-                                             save=True)
+                    new_image, _ = Image.objects.get_or_create(image,
+                                                               number=image_number,
+                                                               event_name=event)
+                    new_image.image.save(name,
+                                         image,
+                                         save=True)
                 except MultipleObjectsReturned:
                     print(f'Изображение {image_number} уже есть в базе данных!')
-        except ConnectionError:
-            pass
-        except requests.exceptions.HTTPError:
-            pass
+            except ConnectionError:
+                pass
+            except requests.exceptions.HTTPError:
+                pass
