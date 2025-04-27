@@ -33,7 +33,10 @@ def show_main(request):
 
 def place_detail(request, place_id):
     try:
-        event = get_object_or_404(Event.objects.select_related(), id=place_id)
+        event = get_object_or_404(
+            Event.objects.select_related(),
+            id=place_id
+            )
     except MultipleObjectsReturned:
         print('Ошибка в данных: Найдено больше одного события')
     images = event.images.all().order_by("number")
@@ -44,8 +47,15 @@ def place_detail(request, place_id):
         "description_long": event.long_description,
         "coordinates": {
             "lon": event.longitude,
-            "lat": event.latitude}}
-    response = JsonResponse(event_parameters, safe=False,
-                            json_dumps_params={"ensure_ascii": False,
-                                               "indent": 4})
+            "lat": event.latitude
+            }
+        }
+    response = JsonResponse(
+        event_parameters,
+        safe=False,
+        json_dumps_params={
+            "ensure_ascii": False,
+            "indent": 4
+            }
+        )
     return response

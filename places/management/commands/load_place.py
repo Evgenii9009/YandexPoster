@@ -21,13 +21,15 @@ class Command(BaseCommand):
         response.raise_for_status()
         place = response.json()
         try:
-            event, _ = Event.objects.get_or_create(title=place["title"],
-                                                   defaults = {
-                                                       "long_description": place["description_long"],
-                                                       "short_description": place["description_short"],
-                                                       "longitude": place["coordinates"]["lng"],
-                                                       "latitude": place["coordinates"]["lat"],
-                                                   })
+            event, _ = Event.objects.get_or_create(
+                title=place["title"],
+                defaults={
+                        "long_description": place["description_long"],
+                        "short_description": place["description_short"],
+                        "longitude": place["coordinates"]["lng"],
+                        "latitude": place["coordinates"]["lat"],
+                        }
+                )
             for image_number, image_url in enumerate(place["imgs"]):
                 try:
                     response = requests.get(image_url)
@@ -35,12 +37,11 @@ class Command(BaseCommand):
                     name = image_url.split("/")[-1]
                     image = ContentFile(response.content, name)
                     try:
-                        new_image, _ = Image.objects.get_or_create(image=image,
-                                                                   number=image_number,
-                                                                   event_name=event)
-                        new_image.image.save(name,
-                                             image,
-                                             save=True)
+                        Image.objects.get_or_create(
+                            image=image,
+                            number=image_number,
+                            event_name=event
+                            )
                     except MultipleObjectsReturned:
                         print(f'Изображение {image_number} уже есть в базе данных!')
                 except ConnectionError:

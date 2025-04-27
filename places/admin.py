@@ -15,10 +15,13 @@ class ImageAdmin(admin.ModelAdmin):
     raw_id_fields = ["event_name"]
 
     def event_image(self, obj):
-        return format_html('<img style="max-width: 300px; max-height: 200px;" src="{url}" width="{width}" height={height} />',
-                           url=obj.image.url,
-                           width=obj.image.width,
-                           height=obj.image.height)
+        return format_html(
+            """<img style="max-width: 300px; max-height: 200px;"
+            src="{url}" width="{width}" height={height} />""",
+            url=obj.image.url,
+            width=obj.image.width,
+            height=obj.image.height
+            )
 
 
 class ImageStackedInline(SortableStackedInline):
