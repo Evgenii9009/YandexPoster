@@ -10,22 +10,24 @@ from places.models import Event, Image
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    fields = ("event_name", "event_image", "number")
-    readonly_fields = ["event_image"]
+    fields = ("event_name", "number")
     raw_id_fields = ["event_name"]
-
-    def event_image(self, obj):
-        return format_html(
-            """<img style="max-width: 300px; max-height: 200px;"
-            src="{url}" width="{width}" height={height} />""",
-            url=obj.image.url,
-            width=obj.image.width,
-            height=obj.image.height
-            )
 
 
 class ImageStackedInline(SortableStackedInline):
     model = Image
+    fields = ("event_image",)
+    readonly_fields = ("event_image",)
+
+    def event_image(self, obj):
+        return format_html(
+            """<img style="max-width: 300px; max-height: 200px;"
+            src="{url}" width="{width}" height="{height}" />""",
+            url=obj.image.url,
+            width=obj.image.width,
+            height=obj.image.height
+            )
+    event_image.short_description = "Фото события"
 
 
 @admin.register(Event)
