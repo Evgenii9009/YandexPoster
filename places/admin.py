@@ -17,6 +17,7 @@ class ImageAdmin(admin.ModelAdmin):
 class ImageStackedInline(SortableStackedInline):
     model = Image
     readonly_fields = ("event_image", "event_name")
+    
     def event_image(self, obj):
         return format_html(
             """<img style="max-width: 300px; max-height: 200px;"
