@@ -16,13 +16,11 @@ class ImageAdmin(admin.ModelAdmin):
 
 class ImageStackedInline(SortableStackedInline):
     model = Image
-    fields = ("event_image",)
-    readonly_fields = ("event_image",)
-
+    readonly_fields = ("event_image", "event_name")
     def event_image(self, obj):
         return format_html(
             """<img style="max-width: 300px; max-height: 200px;"
-            src="{url}" width="{width}" height="{height}" />""",
+            src="{url}"/>""",
             url=obj.image.url,
             width=obj.image.width,
             height=obj.image.height
